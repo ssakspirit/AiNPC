@@ -1,0 +1,18 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tree:*)",
+      "Bash(npm install)",
+      "Bash(npm run dev:*)",
+      "Bash(npm start)",
+      "Bash(netstat:*)",
+      "Bash(findstr:*)",
+      "Bash(taskkill:*)",
+      "Bash(Get-Process node -ErrorAction SilentlyContinue)",
+      "Bash(Stop-Process -Force)",
+      "Bash(tasklist /FI \"PID eq 34888\")",
+      "Bash(cmd.exe /c \"taskkill /F /PID 34888\")",
+      "Bash(cmd.exe /c \"taskkill /F /PID 34888 & taskkill /F /PID 25940 & taskkill /F /PID 28028\")"
+    ]
+  }
+}
