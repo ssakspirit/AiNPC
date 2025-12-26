@@ -18,7 +18,7 @@ export async function analyzeImageForBuilding(imageData, apiKey) {
   const genAI = new GoogleGenerativeAI(apiKey)
 
   const model = genAI.getGenerativeModel({
-    model: 'gemini-1.5-flash',
+    model: CONFIG.AI_MODEL, // 동일한 모델 사용
     systemInstruction: `You are a Minecraft builder assistant. Analyze images and generate building instructions.
 
 Output ONLY a JSON array in this exact format:

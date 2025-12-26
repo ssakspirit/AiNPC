@@ -7,7 +7,7 @@ export const CONFIG = {
   MINECRAFT_WS_PATH: '/ws',
 
   // AI Settings
-  AI_MODEL: 'gemini-1.5-flash',
+  AI_MODEL: 'gemini-2.0-flash-exp', // 2025년 최신 모델
   MAX_RESPONSE_LENGTH: 200, // 마인크래프트 채팅창 길이 제한
 
   // Commands
