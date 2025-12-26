@@ -173,6 +173,53 @@ WebSocket 이벤트:
 - `build:progress`: 건축 진행률
 - `build:complete`: 건축 완료
 
+## Troubleshooting
+
+### 마인크래프트 연결 오류: "암호화된 세션이 필요합니다"
+
+**증상:**
+- Bridge 로그에 다음과 같은 오류 표시:
+  ```json
+  {
+    "body": {
+      "statusCode": -2147418107,
+      "statusMessage": "암호화된 세션이 필요합니다"
+    },
+    "header": {
+      "messagePurpose": "error"
+    }
+  }
+  ```
+- 마인크래프트에서 `/connect localhost:19131` 실행 시 "서버에 연결되었습니다" 표시되지만 바로 오류 발생
+- 플레이어 메시지가 Bridge로 전달되지 않음
+
+**원인:**
+마인크래프트 교육용 에디션의 "Require Encrypted Websockets" 설정이 활성화되어 있음. 이 설정이 켜져 있으면 암호화되지 않은 일반 WebSocket 연결을 거부합니다.
+
+**해결 방법:**
+1. 마인크래프트 교육용 에디션 실행
+2. **설정(Settings) → 일반(General) → 프로필(Profile)** 이동
+3. **"Require Encrypted Websockets"** 옵션을 **끄기(OFF)**
+4. 설정 저장 후 `/connect localhost:19131` 재실행
+
+**참고:**
+- 암호화된 WebSocket(WSS) 지원은 `com.microsoft.minecraft.wsencrypt` 프로토콜 구현이 필요하며 매우 복잡함
+- 로컬 개발 환경에서는 암호화 없는 WS 연결로 충분
+- 프로덕션 배포 시에도 localhost 연결이므로 암호화 불필요
+
+### UWP 루프백 허용
+
+마인크래프트가 localhost에 연결되지 않는 경우:
+```cmd
+CheckNetIsolation LoopbackExempt -a -n="Microsoft.MinecraftUWP_8wekyb3d8bbwe"
+```
+또는 교육용 에디션:
+```cmd
+CheckNetIsolation LoopbackExempt -a -n="Microsoft.MinecraftEducationEdition_8wekyb3d8bbwe"
+```
+
+관리자 권한 필요. 웹 UI의 "환경 설정" 페이지에서 자동 설정 가능.
+
 ## Deployment
 
 EXE 빌드는 `pkg` 라이브러리 사용:
@@ -187,4 +234,5 @@ npm run build:exe
 - API 키는 사용자가 직접 입력 (하드코딩 금지)
 - Windows 방화벽 설정 필요 (포트 19131, 8080)
 - **UWP 루프백 허용 필수**: `CheckNetIsolation LoopbackExempt -a -n="Microsoft.MinecraftUWP_8wekyb3d8bbwe"`
+- **암호화된 웹소켓 설정 해제**: 마인크래프트 설정에서 "Require Encrypted Websockets" 끄기
 - 상세 가이드: `docs/DEPLOYMENT.md`

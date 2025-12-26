@@ -165,6 +165,22 @@ export default function APIKeyManager() {
       <div className="card">
         <h3 className="text-lg font-semibold mb-4">마인크래프트 연결 설정 (필수)</h3>
 
+        <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-4 mb-4">
+          <div className="flex gap-3">
+            <AlertCircle className="text-red-400 flex-shrink-0" size={20} />
+            <div className="text-sm">
+              <p className="text-red-400 font-semibold mb-2">⚠️ 필수 설정: 암호화된 웹소켓 해제</p>
+              <p className="text-red-300 mb-2">
+                마인크래프트에서 <strong>설정 → 일반 → 프로필</strong>로 이동하여
+                <strong className="block mt-1">"Require Encrypted Websockets"</strong> 옵션을 <strong>끄기(OFF)</strong>로 설정하세요.
+              </p>
+              <p className="text-red-300 text-xs">
+                이 설정을 변경하지 않으면 "암호화된 세션이 필요합니다" 오류가 발생하여 연결할 수 없습니다.
+              </p>
+            </div>
+          </div>
+        </div>
+
         <div className="bg-orange-500/10 border border-orange-500/30 rounded-lg p-4 mb-4">
           <div className="flex gap-3">
             <AlertCircle className="text-orange-400 flex-shrink-0" size={20} />
@@ -223,6 +239,7 @@ export default function APIKeyManager() {
           </div>
 
           <div className="text-xs text-gray-500 space-y-1">
+            <p>• <strong className="text-red-400">중요:</strong> 먼저 마인크래프트에서 "Require Encrypted Websockets" 설정을 끄세요</p>
             <p>• "자동 설정"은 브릿지 서버가 관리자 권한으로 실행 중일 때만 작동합니다</p>
             <p>• ".bat 파일 다운로드" 후 우클릭 → "관리자 권한으로 실행"하세요</p>
             <p>• 설정 후 마인크래프트에서 <code className="bg-dark-bg px-1">/connect localhost:19131</code> 입력</p>

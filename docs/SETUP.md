@@ -94,6 +94,17 @@ CheckNetIsolation LoopbackExempt -s
 ```
 목록에 Minecraft가 있으면 성공입니다.
 
+### ⚠️ 중요: 암호화된 웹소켓 설정 해제 (필수)
+
+마인크래프트 교육용 에디션은 기본적으로 암호화된 WebSocket 연결만 허용합니다. 일반 WebSocket 연결을 허용하려면 다음 설정을 변경해야 합니다:
+
+1. 마인크래프트 교육용 에디션 실행
+2. **설정(Settings) → 일반(General) → 프로필(Profile)** 이동
+3. **"Require Encrypted Websockets"** 옵션을 **끄기(OFF)**
+4. 설정 저장
+
+이 설정을 변경하지 않으면 연결 시 "암호화된 세션이 필요합니다" 오류가 발생합니다.
+
 ### 연결 단계
 
 1. 마인크래프트 교육용 에디션 실행
@@ -137,7 +148,14 @@ NPC가 응답하면 설정이 성공적으로 완료된 것입니다!
 
 ### 마인크래프트 연결 안됨
 
-**가장 흔한 원인: UWP 루프백 허용 안됨**
+**가장 흔한 원인 1: 암호화된 웹소켓 설정**
+- 오류 메시지: "암호화된 세션이 필요합니다" (statusCode: -2147418107)
+- 해결 방법:
+  1. 마인크래프트 설정(Settings) → 일반(General) → 프로필(Profile)
+  2. "Require Encrypted Websockets" 옵션을 **끄기(OFF)**
+  3. 설정 저장 후 재연결
+
+**가장 흔한 원인 2: UWP 루프백 허용 안됨**
 - 관리자 권한으로 다음 명령어 실행:
   ```cmd
   CheckNetIsolation LoopbackExempt -a -n="Microsoft.MinecraftUWP_8wekyb3d8bbwe"
